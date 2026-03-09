@@ -22,7 +22,7 @@ class Books extends Model
 
 
 
-    public function catgories(){
-        return $this->hasOne(Categorie::class);
+    public function categories(){
+        return $this->belongsTo(Categorie::class, 'category_id');
     }
 }
