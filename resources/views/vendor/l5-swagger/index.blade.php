@@ -140,12 +140,13 @@
 
             requestInterceptor: function(request) {
                 request.headers['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
+                request.headers['Accept'] = 'application/json';
                 return request;
             },
             responseInterceptor: function(response) {
                 if ((response.url.endsWith('/login') || response.url.endsWith('/register')) && response.obj && response.obj.token) {
                     const token = response.obj.token;
-                    ui.preauthorizeApiKey('sanctum', token);
+                    window.ui.preauthorizeApiKey('sanctum', token);
                 }
                 return response;
             },
