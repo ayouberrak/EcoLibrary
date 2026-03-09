@@ -34,8 +34,8 @@ class AuthController extends Controller
                 content: new OA\JsonContent(
                     type: "object",
                     properties: [
-                        new OA\Property(property: "user_id", type: "integer"),
-                        new OA\Property(property: "token", type: "string")
+                        new OA\Property(property: "token", type: "string"),
+                        new OA\Property(property: "user", type: "object")
                     ]
                 )
             ),
@@ -43,7 +43,8 @@ class AuthController extends Controller
                 response: 422,
                 description: "invalid ",
             )
-        ]
+        ],
+        security: []
     )]
     public function register(Request $request){
         $request->validate([
@@ -85,21 +86,22 @@ class AuthController extends Controller
         ),
         responses:[
             new OA\Response(
-                response:201,
+                response:200,
                 description:"loged",
                 content: new OA\JsonContent(
                     type:"object",
                     properties:[
-                        new OA\Property(property: "user_id", type: "integer"),
-                        new OA\Property(property: "token", type: "string")
+                        new OA\Property(property: "token", type: "string"),
+                        new OA\Property(property:"user", type:"object")
                     ]
                 )
             ),
             new OA\Response(
-                response:442,
+                response:422,
                 description:"invalid",
             )
-        ]
+        ],
+        security: []
     )]
     public function login(Request $request){
         $request->validate([
